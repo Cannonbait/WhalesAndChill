@@ -1,5 +1,17 @@
-function krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE)
+function krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE)
+n = size(krillPopulation(:,1));
+XPos = krillPopulation(:,1);
+YPos = krillPopulation(:,2);
+VonNeuman = [1 -1 0 0; 0 0 1 -1]; % VonNeuman Neighbourhood
 
-  
+for i = 1:n
+    for t= 1:4
+        i2 = XPos(i)+VonNeuman(1,t); j2= YPos(i)+VonNeuman(2,t);
+        if i2>0 && i2 <AREA_SIZE+1 && j2>0 && j2 <AREA_SIZE+1 && rand < KRILL_MOVEMENT_RATE
+            XPos(i) = XPos(i)+VonNeuman(1,t);
+            YPos(i) = YPos(i)+VonNeuman(2,t);
+        end
+    end
+end
 
 end
