@@ -18,7 +18,8 @@ for iTimestep = 1:TIMESTEPS
   whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE);
   
   %Predation
-  [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation);
+  [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...
+  AREA_SIZE,NUMBER_KRILLS,NUMBER_WHALES);
   
   %Breeding
   whalePopulation = WhaleBreeding(whalePopulation);
