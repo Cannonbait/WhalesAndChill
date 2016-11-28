@@ -1,7 +1,8 @@
 function whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE)
 n = size(whalePopulation(:,1));
 VonNeuman = [1 -1 0 0; 0 0 1 -1]; % VonNeuman Neighbourhood
-
+XPos = whalePopulation(:,1);
+YPos = whalePopulation(:,2);
 for i = 1:n
     for t= 1:4
         i2 = XPos(i)+VonNeuman(1,t); j2= YPos(i)+VonNeuman(2,t);
