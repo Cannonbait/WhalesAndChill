@@ -4,12 +4,12 @@ NUMBER_WHALES = 100;
 NUMBER_KRILLS = 1000;
 AREA_SIZE = 100;
 
-WHALE_MOVEMENT_RATE = 0.5;
-KRILL_MOVEMENT_RATE = 0.2;
-Whale_breed_Score = 50;
+WHALE_MOVEMENT_RATE = 0.3;
+KRILL_MOVEMENT_RATE = 0.6;
+Whale_breed_Score = 40;
 New_Krills_Limit = 5;
 Interval = 50;
-Starvation_Value = 2;
+Starvation_Value = 2.5;
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE);
 
@@ -17,9 +17,11 @@ TIMESTEPS = 10000;
 
 statistics = zeros(2,TIMESTEPS);
 t = 1;
+tic
 for iTimestep = 1:TIMESTEPS
     disp(t);
-  % Movement
+  % Movement : try to possibly move in swarms or in groups 
+  % Insted of random movement
   krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE);
   whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE);
   
@@ -34,6 +36,15 @@ for iTimestep = 1:TIMESTEPS
   %Starvation
   whalePopulation = WhaleStarvation(whalePopulation,TIMESTEPS,t,Starvation_Value,Interval);
   
+  %Fishing (To be added)
+  
+  %Animation
+  figure(1);
+  clf;
+  plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
+  hold on
+  plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
+  pause(0.01);
   t = t + 1;
 end
-  
+toc
