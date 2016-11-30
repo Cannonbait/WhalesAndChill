@@ -1,5 +1,7 @@
 clc
-clear;close all;
+clear;
+close all;
+DEBUG_MODE_ON = 0; % Set this to 0 to stop plots and print outs during simulation
 NUMBER_WHALES = 100;
 NUMBER_KRILLS = 1000;
 AREA_SIZE = 100;
@@ -19,8 +21,10 @@ statistics = zeros(2,TIMESTEPS);
 figure(1);
 tic
 for iTimestep = 1:TIMESTEPS
-    fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
-        iTimestep, size(whalePopulation, 1), size(krillPopulation, 1));
+    if (DEBUG_MODE_ON)
+        fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
+            iTimestep, size(whalePopulation, 1), size(krillPopulation, 1));
+    end
     % Movement : try to possibly move in swarms or in groups
     % Insted of random movement
     krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE);
@@ -40,10 +44,12 @@ for iTimestep = 1:TIMESTEPS
     %Fishing (To be added)
     
     %Animation
-    clf;
-    plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
-    hold on
-    plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
-    pause(0.01);
+    if (DEBUG_MODE_ON)
+        clf;
+        plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
+        hold on
+        plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
+        pause(0.01);
+    end
 end
 toc
