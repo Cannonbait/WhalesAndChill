@@ -24,37 +24,36 @@ statistics = zeros(2,TIMESTEPS);
 figure(1);
 tic
 for iTimestep = 1:TIMESTEPS
-<<<<<<< HEAD
-    if (DEBUG_MODE_ON)
-        fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
-            iTimestep, size(whalePopulation, 1), size(krillPopulation, 1));
-    end
-
-    % Movement : try to possibly move in swarms or in groups
-    % Insted of random movement
-    krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE);
-    whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE);
-    
-    %Predation
-    [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...
-        AREA_SIZE);
-    
-    %Breeding
-    whalePopulation = WhaleBreeding(whalePopulation,Whale_breed_Score,AREA_SIZE);
-    krillPopulation = KrillBreeding(krillPopulation,KRILL_REPRODUCTION_RATE,AREA_SIZE);
-    
-    %Starvation
-    whalePopulation = WhaleStarvation(whalePopulation, STARVATION_RATE, MIN_FOOD_SURVIVAL);
-    
-    %Fishing (To be added)
-    
-    %Animation
-    if (DEBUG_MODE_ON)
-        clf;
-        plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
-        hold on
-        plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
-        pause(0.01);
-    end
+  if (DEBUG_MODE_ON)
+    fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
+      iTimestep, size(whalePopulation, 1), size(krillPopulation, 1));
+  end
+  
+  % Movement : try to possibly move in swarms or in groups
+  % Insted of random movement
+  krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE);
+  whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE);
+  
+  %Predation
+  [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...
+    AREA_SIZE);
+  
+  %Breeding
+  whalePopulation = WhaleBreeding(whalePopulation,Whale_breed_Score,AREA_SIZE);
+  krillPopulation = KrillBreeding(krillPopulation,KRILL_REPRODUCTION_RATE,AREA_SIZE);
+  
+  %Starvation
+  whalePopulation = WhaleStarvation(whalePopulation, STARVATION_RATE, MIN_FOOD_SURVIVAL);
+  
+  %Fishing (To be added)
+  
+  %Animation
+  if (DEBUG_MODE_ON)
+    clf;
+    plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
+    hold on
+    plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
+    pause(0.01);
+  end
 end
 toc
