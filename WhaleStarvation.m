@@ -8,5 +8,4 @@ if ismember(t,Int)
     [x] = find(whalePopulation(:,1).*Remove);
     whalePopulation = whalePopulation(x,:);
 end
-
 end
