@@ -15,6 +15,10 @@ function krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE)
     else
       x = x-1;
     end
+    x = min(areaSize,x);
+    x = max(1, x);
+    y = min(areaSize,y);
+    y = max(1, y);
     krillPopulation(y,x) = 1;
   end
 

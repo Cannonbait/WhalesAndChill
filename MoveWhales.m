@@ -5,6 +5,7 @@ function whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE)
   
   for i = 1:size(krill,1)
     [y,x] = ind2sub(areaSize, krill(i));
+    fullness = whalePopulation(y,x);
     whalePopulation(y,x) = 0;
     if movementSeed(i) <= 0.25
       y = y+1;
@@ -19,7 +20,7 @@ function whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE)
     x = max(1, x);
     y = min(areaSize,y);
     y = max(1, y);
-    whalePopulation(y,x) = 1;
+    whalePopulation(y,x) = fullness;
   end
 
 end

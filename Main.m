@@ -1,33 +1,34 @@
-clc
+
 clear;
+clc;
 close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
-NUMBER_WHALES = 100;
-NUMBER_KRILLS = 1000;
+NUMBER_WHALES = 10;
+NUMBER_KRILLS = 100;
 AREA_SIZE = 100;
 
 WHALE_MOVEMENT_RATE = 0.3;
 KRILL_MOVEMENT_RATE = 0.6;
-KRILL_REPRODUCTION_RATE = 0.01;
+KRILL_REPRODUCTION_RATE = 0.1;
 STARVATION_RATE = 10;
-INITIAL_FULLNESS = 100;
+INITIAL_FULLNESS = 60;
 MIN_FOOD_SURVIVAL = 5;
-Whale_breed_Score = 40;
+WHALE_BREED_REQUIREMENT = 80;
 New_Krills_Limit = 5;
 Interval = 50;
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
 
-TIMESTEPS = 10000;
+TIMESTEPS = 1000;
 
 statistics = zeros(2,TIMESTEPS);
-figure(1);
+% figure(1);
 tic
 for iTimestep = 1:TIMESTEPS
   if (DEBUG_MODE_ON)
     fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
-      iTimestep, size(whalePopulation, 1), size(krillPopulation, 1));
+      iTimestep, sum(whalePopulation(:) > 0), sum(krillPopulation(:) > 0));
   end
   
   % Movement : try to possibly move in swarms or in groups
@@ -35,13 +36,14 @@ for iTimestep = 1:TIMESTEPS
   krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE);
   whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE);
   
+  
   %Predation
   [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...
     AREA_SIZE);
   
   %Breeding
-  whalePopulation = BreedingWhale(whalePopulation,Whale_breed_Score,AREA_SIZE);
-  krillPopulation = BreedingKrill(krillPopulation,KRILL_REPRODUCTION_RATE,AREA_SIZE);
+  whalePopulation = BreedingWhale(whalePopulation,WHALE_BREED_REQUIREMENT,AREA_SIZE, INITIAL_FULLNESS);
+  krillPopulation = BreedingKrill(krillPopulation,KRILL_REPRODUCTION_RATE);
   
   %Starvation
   whalePopulation = WhaleStarvation(whalePopulation, STARVATION_RATE, MIN_FOOD_SURVIVAL);
@@ -50,7 +52,7 @@ for iTimestep = 1:TIMESTEPS
   
   %Animation
   if (DEBUG_MODE_ON)
-    DrawPopulations(whalePopulation, krillPopulation, AREA_SIZE);
+    DrawPopulations(whalePopulation, krillPopulation);
   end
 end
 toc

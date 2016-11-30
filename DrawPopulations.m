@@ -1,24 +1,13 @@
-function DrawPopulations(whalePopulation, krillPopulation, areaSize) 
-  % Create shared lattice (2 = krill, 3 = whale)
-  lattice = zeros(areaSize, areaSize);
+function DrawPopulations(whalePopulation, krillPopulation) 
   
-  for i = 1:size(krillPopulation, 1)
-    xPos = krillPopulation(i, 1);
-    yPos = krillPopulation(i, 2);
-    lattice(xPos, yPos) = 2;
-  end
+  lattice = sign(whalePopulation)*2 + krillPopulation;
   
-  for i = 1:size(whalePopulation, 1)
-    xPos = whalePopulation(i, 1);
-    yPos = whalePopulation(i, 2);
-    lattice(xPos, yPos) = 3;
-  end
   
   % Plot
-  figure(1);
-  clf;
-  image(lattice);
-  colorMap = [1 1 1; 0 1 0; 0 0 0];
+%   figure(1);
+%   clf;
+  imagesc(lattice);
+  colorMap = [1 1 1; 1 0 0; 0 0 1];
   colormap(colorMap);
   drawnow;
 end
