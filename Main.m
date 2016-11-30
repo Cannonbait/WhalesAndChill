@@ -16,6 +16,7 @@ whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE);
 TIMESTEPS = 10000;
 
 statistics = zeros(2,TIMESTEPS);
+figure(1);
 tic
 for iTimestep = 1:TIMESTEPS
     disp(iTimestep);
@@ -38,7 +39,6 @@ for iTimestep = 1:TIMESTEPS
     %Fishing (To be added)
     
     %Animation
-    figure(1);
     clf;
     plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
     hold on
