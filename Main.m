@@ -19,8 +19,8 @@ statistics = zeros(2,TIMESTEPS);
 figure(1);
 tic
 for iTimestep = 1:TIMESTEPS
-    fprintf('Number of whales: %d - Number of krill: %d\n',...
-        size(whalePopulation, 1), size(krillPopulation, 1));
+    fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
+        iTimestep, size(whalePopulation, 1), size(krillPopulation, 1));
     % Movement : try to possibly move in swarms or in groups
     % Insted of random movement
     krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE);
