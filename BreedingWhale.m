@@ -1,4 +1,4 @@
-function whalePopulation = WhaleBreeding(whalePopulation,Whale_breed_Score,GRID_SIZE)
+function whalePopulation = BreedingWhale(whalePopulation,Whale_breed_Score,GRID_SIZE)
   % add new whales
   ind = size(find(whalePopulation(:,3)>=Whale_breed_Score),1);
   new = randi([1 GRID_SIZE],ind,2);

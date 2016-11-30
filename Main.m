@@ -39,8 +39,8 @@ for iTimestep = 1:TIMESTEPS
     AREA_SIZE);
   
   %Breeding
-  whalePopulation = WhaleBreeding(whalePopulation,Whale_breed_Score,AREA_SIZE);
-  krillPopulation = KrillBreeding(krillPopulation,KRILL_REPRODUCTION_RATE,AREA_SIZE);
+  whalePopulation = BreedingWhale(whalePopulation,Whale_breed_Score,AREA_SIZE);
+  krillPopulation = BreedingKrill(krillPopulation,KRILL_REPRODUCTION_RATE,AREA_SIZE);
   
   %Starvation
   whalePopulation = WhaleStarvation(whalePopulation, STARVATION_RATE, MIN_FOOD_SURVIVAL);
