@@ -31,8 +31,8 @@ for iTimestep = 1:TIMESTEPS
   
   % Movement : try to possibly move in swarms or in groups
   % Insted of random movement
-  krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE);
-  whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE);
+  krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE);
+  whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE);
   
   %Predation
   [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...

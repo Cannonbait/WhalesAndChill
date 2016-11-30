@@ -1,16 +1,21 @@
-function whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE)
-  n = size(whalePopulation(:,1));
-  VonNeuman = [1 -1 0 0; 0 0 1 -1]; % VonNeuman Neighbourhood
-  XPos = whalePopulation(:,1);
-  YPos = whalePopulation(:,2);
-  for i = 1:n
-    for t= 1:4
-      i2 = XPos(i)+VonNeuman(1,t);
-      j2 = YPos(i)+VonNeuman(2,t);
-      if i2 > 0 && i2 < AREA_SIZE+1 && j2 > 0 && j2 < AREA_SIZE+1 && rand < WHALE_MOVEMENT_RATE
-        whalePopulation(i,1) = whalePopulation(i,1)+VonNeuman(1,t);
-        whalePopulation(i,2) = whalePopulation(i,2)+VonNeuman(2,t);
-      end
+function whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE)
+  areaSize = size(whalePopulation,1);
+  krill = find(whalePopulation > 0);
+  movementSeed = rand(size(krill,1),1);
+  
+  for i = 1:size(krill,1)
+    [y,x] = ind2sub(areaSize, krill(i));
+    whalePopulation(y,x) = 0;
+    if movementSeed(i) <= 0.25
+      y = y+1;
+    elseif movementSeed(i) <= 0.5
+      y = y-1;
+    elseif movementSeed(i) <= 0.75
+      x = x+1;
+    else
+      x = x-1;
     end
+    whalePopulation(y,x) = 1;
   end
+
 end
