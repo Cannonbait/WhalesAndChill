@@ -4,7 +4,7 @@ close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
 NUMBER_WHALES = 100;
 NUMBER_KRILLS = 1000;
-AREA_SIZE = 1000;
+AREA_SIZE = 100;
 
 WHALE_MOVEMENT_RATE = 0.3;
 KRILL_MOVEMENT_RATE = 0.6;
