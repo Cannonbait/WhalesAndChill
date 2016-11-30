@@ -49,11 +49,7 @@ for iTimestep = 1:TIMESTEPS
   
   %Animation
   if (DEBUG_MODE_ON)
-    clf;
-    plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
-    hold on
-    plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
-    pause(0.01);
+    DrawPopulations(whalePopulation, krillPopulation, AREA_SIZE);
   end
 end
 toc
