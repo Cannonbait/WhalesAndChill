@@ -4,14 +4,16 @@ close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
 NUMBER_WHALES = 100;
 NUMBER_KRILLS = 1000;
-AREA_SIZE = 100;
+AREA_SIZE = 1000;
 
 WHALE_MOVEMENT_RATE = 0.3;
 KRILL_MOVEMENT_RATE = 0.6;
+STARVATION_RATE = 10;
+MIN_FOOD_SURVIVAL = 5;
 Whale_breed_Score = 40;
 New_Krills_Limit = 5;
 Interval = 50;
-Starvation_Value = 2.5;
+
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE);
 
@@ -40,7 +42,7 @@ for iTimestep = 1:TIMESTEPS
     krillPopulation = KrillBreeding(krillPopulation,New_Krills_Limit,AREA_SIZE);
     
     %Starvation
-    whalePopulation = WhaleStarvation(whalePopulation,TIMESTEPS,iTimestep,Starvation_Value,Interval);
+    whalePopulation = WhaleStarvation(whalePopulation, STARVATION_RATE, MIN_FOOD_SURVIVAL);
     
     %Fishing (To be added)
     
@@ -52,6 +54,5 @@ for iTimestep = 1:TIMESTEPS
         plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
         pause(0.01);
     end
-
 end
 toc
