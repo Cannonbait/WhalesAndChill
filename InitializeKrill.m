@@ -1,3 +1,7 @@
-function krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE)
-  krillPopulation = randi([1 AREA_SIZE],NUMBER_KRILLS,2);
+function krillPopulation = InitializeKrill(numberKrills, areaSize)
+  krillPopulation = zeros(areaSize);
+  initialPositions = randperm(areaSize*areaSize, numberKrills);
+  for pos = 1:size(initialPositions)
+    krillPopulation(initialPositions(pos)) = 1;
+  end
 end
