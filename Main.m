@@ -8,6 +8,7 @@ AREA_SIZE = 1000;
 
 WHALE_MOVEMENT_RATE = 0.3;
 KRILL_MOVEMENT_RATE = 0.6;
+KRILL_REPRODUCTION_RATE = 0.01;
 STARVATION_RATE = 10;
 MIN_FOOD_SURVIVAL = 5;
 Whale_breed_Score = 40;
@@ -23,6 +24,7 @@ statistics = zeros(2,TIMESTEPS);
 figure(1);
 tic
 for iTimestep = 1:TIMESTEPS
+<<<<<<< HEAD
     if (DEBUG_MODE_ON)
         fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
             iTimestep, size(whalePopulation, 1), size(krillPopulation, 1));
@@ -39,7 +41,7 @@ for iTimestep = 1:TIMESTEPS
     
     %Breeding
     whalePopulation = WhaleBreeding(whalePopulation,Whale_breed_Score,AREA_SIZE);
-    krillPopulation = KrillBreeding(krillPopulation,New_Krills_Limit,AREA_SIZE);
+    krillPopulation = KrillBreeding(krillPopulation,KRILL_REPRODUCTION_RATE,AREA_SIZE);
     
     %Starvation
     whalePopulation = WhaleStarvation(whalePopulation, STARVATION_RATE, MIN_FOOD_SURVIVAL);
