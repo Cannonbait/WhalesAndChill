@@ -19,30 +19,30 @@ statistics = zeros(2,TIMESTEPS);
 tic
 for iTimestep = 1:TIMESTEPS
     disp(iTimestep);
-  % Movement : try to possibly move in swarms or in groups 
-  % Insted of random movement
-  krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE);
-  whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE);
-  
-  %Predation
-  [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...
-                                                                 AREA_SIZE);
-  
-  %Breeding
-  whalePopulation = WhaleBreeding(whalePopulation,Whale_breed_Score,AREA_SIZE);
-  krillPopulation = KrillBreeding(krillPopulation,New_Krills_Limit,AREA_SIZE);
-  
-  %Starvation
-  whalePopulation = WhaleStarvation(whalePopulation,TIMESTEPS,iTimestep,Starvation_Value,Interval);
-  
-  %Fishing (To be added)
-  
-  %Animation
-  figure(1);
-  clf;
-  plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
-  hold on
-  plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
-  pause(0.01);
+    % Movement : try to possibly move in swarms or in groups
+    % Insted of random movement
+    krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE,AREA_SIZE);
+    whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE,AREA_SIZE);
+    
+    %Predation
+    [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...
+        AREA_SIZE);
+    
+    %Breeding
+    whalePopulation = WhaleBreeding(whalePopulation,Whale_breed_Score,AREA_SIZE);
+    krillPopulation = KrillBreeding(krillPopulation,New_Krills_Limit,AREA_SIZE);
+    
+    %Starvation
+    whalePopulation = WhaleStarvation(whalePopulation,TIMESTEPS,iTimestep,Starvation_Value,Interval);
+    
+    %Fishing (To be added)
+    
+    %Animation
+    figure(1);
+    clf;
+    plot(whalePopulation(:,1),whalePopulation(:,2),'.k')
+    hold on
+    plot(krillPopulation(:,1),krillPopulation(:,2),'.g')
+    pause(0.01);
 end
 toc
