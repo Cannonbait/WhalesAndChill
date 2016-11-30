@@ -10,13 +10,14 @@ WHALE_MOVEMENT_RATE = 0.3;
 KRILL_MOVEMENT_RATE = 0.6;
 KRILL_REPRODUCTION_RATE = 0.01;
 STARVATION_RATE = 10;
+INITIAL_FULLNESS = 100;
 MIN_FOOD_SURVIVAL = 5;
 Whale_breed_Score = 40;
 New_Krills_Limit = 5;
 Interval = 50;
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
-whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE);
+whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
 
 TIMESTEPS = 10000;
 

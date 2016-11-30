@@ -15,6 +15,10 @@ function whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE)
     else
       x = x-1;
     end
+    x = min(areaSize,x);
+    x = max(1, x);
+    y = min(areaSize,y);
+    y = max(1, y);
     whalePopulation(y,x) = 1;
   end
 
