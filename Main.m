@@ -18,13 +18,18 @@ whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
 
 TIMESTEPS = 1000;
 
-statistics = zeros(2,TIMESTEPS);
-% figure(1);
+numWhales = zeros(TIMESTEPS, 1);
+numKrills = zeros(TIMESTEPS, 1);
+
 tic
 for iTimestep = 1:TIMESTEPS
+  
+  numWhales(iTimestep) = sum(whalePopulation(:) > 0);
+  numKrills(iTimestep) = sum(krillPopulation(:) > 0);
+  
   if (DEBUG_MODE_ON)
     fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
-      iTimestep, sum(whalePopulation(:) > 0), sum(krillPopulation(:) > 0));
+      iTimestep, numKrills(iTimestep), numKrills(iTimestep));
   end
   
   % Movement : try to possibly move in swarms or in groups
