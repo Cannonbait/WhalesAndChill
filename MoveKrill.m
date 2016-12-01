@@ -7,8 +7,9 @@ function krillPopulation = MoveKrill(krillPopulation)
   for i = 1:numKrill
     x = X(i);
     y = Y(i);
-    krillPopulation(x,y) = 0;
-    if movementSeed(i) <= 0.25
+    xOld = x;
+    yOld = y;
+    if movementSeed(i) <= 0.25;
       y = y+1;
     elseif movementSeed(i) <= 0.5
       y = y-1;
@@ -18,6 +19,8 @@ function krillPopulation = MoveKrill(krillPopulation)
       x = x-1;
     end
     [x, y] = PeriodicBoundary(x, y, areaSize);
+    [x, y] = FixCollisions(xOld, yOld, x, y, krillPopulation);
+    krillPopulation(xOld, yOld) = 0;
     krillPopulation(x,y) = 1;
   end
 end

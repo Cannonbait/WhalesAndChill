@@ -7,8 +7,9 @@ function whalePopulation = MoveWhales(whalePopulation)
   for i = 1:numWhales
     x = X(i);
     y = Y(i);
+    xOld = x;
+    yOld = y;
     fullness = whalePopulation(x,y);
-    whalePopulation(x,y) = 0;
     if movementSeed(i) <= 0.25
       y = y+1;
     elseif movementSeed(i) <= 0.5
@@ -19,6 +20,8 @@ function whalePopulation = MoveWhales(whalePopulation)
       x = x-1;
     end
     [x, y] = PeriodicBoundary(x, y, areaSize);
+    [x, y] = FixCollisions(xOld, yOld, x, y, whalePopulation);
+    whalePopulation(xOld, yOld) = 0;
     whalePopulation(x,y) = fullness;
   end
 end
