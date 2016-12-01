@@ -7,7 +7,7 @@ function whalePopulation = BreedingWhale(whalePopulation, whaleBreedRequirement,
     numNewWhales = min(numPregnantWhales, numEmptySpaces);
     randLinearIndices = randperm(numEmptySpaces, numNewWhales);
     for i = 1:numNewWhales
-      whalePopulation(pregnantWhales(i)) = whalePopulation(pregnantWhales(i))-breedFullnessReduction;
+      whalePopulation(pregnantWhales(i)) = 200;
       position = emptySpaces(randLinearIndices(i));
       whalePopulation(position) = initialFullness;
     end  

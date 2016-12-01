@@ -1,5 +1,5 @@
-function [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation, fullnessIncreaseWhales)
-  whales = find(whalePopulation > 0);
+function [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation, fullnessIncreaseWhales, whaleMaxFullness)
+  whales = find(whalePopulation < whaleMaxFullness & whalePopulation > 0);
   
   for i = 1:size(whales)
     if krillPopulation(whales(i)) > 0

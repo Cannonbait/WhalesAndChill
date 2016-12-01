@@ -2,17 +2,19 @@ clear;
 clc;
 close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
-NUMBER_WHALES = 170;
-NUMBER_KRILLS = 9000;
+NUMBER_WHALES = 100;
+NUMBER_KRILLS = 5000;
 AREA_SIZE = 100;
 
-KRILL_REPRODUCTION_RATE = 0.01;
+KRILL_CARRYING_CAPACITY = AREA_SIZE^2;
+KRILL_REPRODUCTION_RATE = 1/(AREA_SIZE);      %0.00001
 FULLNESS_INCREASE_WHALES = 10;
 BREEDING_CYCLE = 365;
 STARVATION_RATE = 1;
 INITIAL_FULLNESS = 100;
-MIN_FOOD_SURVIVAL = 5;
+MIN_FOOD_SURVIVAL = 0;
 WHALE_BREED_REQUIREMENT = 800;
+WHALE_MAX_FULLNESS = 1200;
 BREED_FULLNESS_REDUCTION = 600;
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
@@ -39,14 +41,13 @@ for iTimestep = 1:TIMESTEPS
   krillPopulation = MoveKrill(krillPopulation);
   whalePopulation = MoveWhales(whalePopulation);
   
-  
   %Predation
   [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...
-    FULLNESS_INCREASE_WHALES);
-  
+    FULLNESS_INCREASE_WHALES, WHALE_MAX_FULLNESS);
+ 
   %Breeding
   whalePopulation = BreedingWhale(whalePopulation, WHALE_BREED_REQUIREMENT, BREED_FULLNESS_REDUCTION, INITIAL_FULLNESS, iTimestep, BREEDING_CYCLE);
-  krillPopulation = BreedingKrill(krillPopulation, KRILL_REPRODUCTION_RATE);
+  krillPopulation = BreedingKrill(krillPopulation, KRILL_REPRODUCTION_RATE, KRILL_CARRYING_CAPACITY);
   
   %Starvation
   whalePopulation = WhaleStarvation(whalePopulation, STARVATION_RATE, MIN_FOOD_SURVIVAL);
