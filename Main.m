@@ -14,8 +14,6 @@ STARVATION_RATE = 10;
 INITIAL_FULLNESS = 60;
 MIN_FOOD_SURVIVAL = 5;
 WHALE_BREED_REQUIREMENT = 80;
-New_Krills_Limit = 5;
-Interval = 50;
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
