@@ -30,7 +30,7 @@ for iTimestep = 1:TIMESTEPS
   
   if (DEBUG_MODE_ON)
     fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
-      iTimestep, numKrills(iTimestep), numKrills(iTimestep));
+      iTimestep, numWhales(iTimestep), numKrills(iTimestep));
   end
   
   % Movement : try to possibly move in swarms or in groups
