@@ -1,11 +1,12 @@
 function whalePopulation = BreedingWhale(whalePopulation, whaleBreedRequirement,breedFullnessReduction, initialFullness)
   pregnantWhales = find(whalePopulation > whaleBreedRequirement);
+  numPregnantWhales = length(pregnantWhales);
   emptySpaces = find(whalePopulation == 0);
-  noNewWhales = min(size(pregnantWhales,1), size(emptySpaces,1));
-  newWhales = randperm(size(emptySpaces,1), noNewWhales);
-  for i = 1:size(pregnantWhales,1)
+  numEmptySpaces = length(emptySpaces);
+  numNewWhales = min(numPregnantWhales, numEmptySpaces);
+  randLinearIndices = randperm(numEmptySpaces, numNewWhales);
+  for i = 1:numNewWhales
     whalePopulation(pregnantWhales(i)) = whalePopulation(pregnantWhales(i))*breedFullnessReduction;
-    whalePopulation(newWhales(i)) = initialFullness;
-  end
-  
+    whalePopulation(emptySpaces(randLinearIndices(i))) = initialFullness;
+  end  
 end
