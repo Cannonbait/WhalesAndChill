@@ -3,22 +3,22 @@ clear;
 clc;
 close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
-NUMBER_WHALES = 100;
-NUMBER_KRILLS = 1000;
+NUMBER_WHALES = 200;
+NUMBER_KRILLS = 3000;
 AREA_SIZE = 100;
 
-KRILL_REPRODUCTION_RATE = 0.1;
+KRILL_REPRODUCTION_RATE = 0.01;
 FULLNESS_INCREASE_WHALES = 5;
 STARVATION_RATE = 1;
 INITIAL_FULLNESS = 50;
 MIN_FOOD_SURVIVAL = 5;
 WHALE_BREED_REQUIREMENT = 80;
-BREED_FULLNESS_REDUCTION = 0.8;
+BREED_FULLNESS_REDUCTION = 0.9;
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
 
-TIMESTEPS = 100;
+TIMESTEPS = 10000;
 
 numWhales = zeros(TIMESTEPS, 1);
 numKrills = zeros(TIMESTEPS, 1);
@@ -31,7 +31,7 @@ for iTimestep = 1:TIMESTEPS
   
   if (DEBUG_MODE_ON)
     fprintf('Iteration: %d - Number of whales: %d - Number of krill: %d\n',...
-      iTimestep, numKrills(iTimestep), numKrills(iTimestep));
+      iTimestep, numWhales(iTimestep), numKrills(iTimestep));
   end
   
   % Movement : try to possibly move in swarms or in groups
