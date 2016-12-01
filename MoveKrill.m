@@ -1,10 +1,11 @@
 function krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE)
   areaSize = size(krillPopulation,1);
-  krill = find(krillPopulation > 0);
-  movementSeed = rand(size(krill,1),1);
+  [Y,X] = find(krillPopulation > 0);
+  movementSeed = rand(length(Y),1);
   
-  for i = 1:size(krill,1)
-    [y,x] = ind2sub(areaSize, krill(i));
+  for i = 1:length(Y)
+    y = Y(i);
+    x = X(i);
     krillPopulation(y,x) = 0;
     if movementSeed(i) <= 0.25
       y = y+1;

@@ -1,10 +1,11 @@
 function whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE)
   areaSize = size(whalePopulation,1);
-  krill = find(whalePopulation > 0);
-  movementSeed = rand(size(krill,1),1);
+  [Y,X] = find(whalePopulation > 0);
+  movementSeed = rand(length(Y),1);
   
-  for i = 1:size(krill,1)
-    [y,x] = ind2sub(areaSize, krill(i));
+  for i = 1:length(Y)
+    y = Y(i);
+    x = X(i);
     fullness = whalePopulation(y,x);
     whalePopulation(y,x) = 0;
     if movementSeed(i) <= 0.25
