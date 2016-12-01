@@ -7,8 +7,6 @@ NUMBER_WHALES = 10;
 NUMBER_KRILLS = 10000;
 AREA_SIZE = 100;
 
-WHALE_MOVEMENT_RATE = 0.3;
-KRILL_MOVEMENT_RATE = 0.6;
 KRILL_REPRODUCTION_RATE = 0.1;
 STARVATION_RATE = 10;
 INITIAL_FULLNESS = 60;
@@ -31,8 +29,8 @@ for iTimestep = 1:TIMESTEPS
   
   % Movement : try to possibly move in swarms or in groups
   % Insted of random movement
-  krillPopulation = MoveKrill(krillPopulation, KRILL_MOVEMENT_RATE);
-  whalePopulation = MoveWhales(whalePopulation,WHALE_MOVEMENT_RATE);
+  krillPopulation = MoveKrill(krillPopulation);
+  whalePopulation = MoveWhales(whalePopulation);
   
   
   %Predation
