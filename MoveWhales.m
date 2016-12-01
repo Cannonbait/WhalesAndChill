@@ -5,10 +5,11 @@ function whalePopulation = MoveWhales(whalePopulation)
   movementSeed = rand(numWhales,1);
   
   for i = 1:numWhales
-    x = X(i);
-    y = Y(i);
+    oldX = X(i);
+    oldY = Y(i);
+    x = oldX;
+    y = oldY;
     fullness = whalePopulation(x,y);
-    whalePopulation(x,y) = 0;
     if movementSeed(i) <= 0.25
       y = y+1;
     elseif movementSeed(i) <= 0.5
@@ -19,6 +20,8 @@ function whalePopulation = MoveWhales(whalePopulation)
       x = x-1;
     end
     [x, y] = PeriodicBoundary(x, y, areaSize);
+    [x, y] = VerifyMovement(x, y, oldX, oldY, whalePopulation);
+    whalePopulation(oldX, oldY) = 0;
     whalePopulation(x,y) = fullness;
   end
 end

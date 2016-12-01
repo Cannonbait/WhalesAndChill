@@ -5,9 +5,10 @@ function krillPopulation = MoveKrill(krillPopulation)
   movementSeed = rand(numKrill,1);
   
   for i = 1:numKrill
-    x = X(i);
-    y = Y(i);
-    krillPopulation(x,y) = 0;
+    oldX = X(i);
+    oldY = Y(i);
+    x = oldX;
+    y = oldY;
     if movementSeed(i) <= 0.25
       y = y+1;
     elseif movementSeed(i) <= 0.5
@@ -18,6 +19,8 @@ function krillPopulation = MoveKrill(krillPopulation)
       x = x-1;
     end
     [x, y] = PeriodicBoundary(x, y, areaSize);
+    [x, y] = VerifyMovement(x, y, oldX, oldY, krillPopulation);
+    krillPopulation(oldX, oldY) = 0;
     krillPopulation(x,y) = 1;
   end
 end
