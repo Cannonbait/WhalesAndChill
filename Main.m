@@ -4,6 +4,7 @@ close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
 NUMBER_WHALES = 146;
 NUMBER_KRILLS = 2001;
+NUMBER_FISHERMEN = 1;
 AREA_SIZE = 100;
 
 KRILL_CARRYING_CAPACITY = AREA_SIZE^2;
@@ -17,6 +18,7 @@ MIN_FOOD_SURVIVAL = 0;
 WHALE_BREED_REQUIREMENT = 800;
 WHALE_MAX_FULLNESS = 1200;
 POST_BREED_FULLNESS = 200;
+
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
@@ -45,6 +47,8 @@ for iTimestep = 1:TIMESTEPS
   %Predation
   [krillPopulation,whalePopulation] = PredationWhales(krillPopulation, whalePopulation,...
     FULLNESS_INCREASE_WHALES, WHALE_MAX_FULLNESS);
+  
+  krillPopulation = PredationFishermen(krillPopulation, NUMBER_FISHERMEN);
   
  
   %Breeding
