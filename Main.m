@@ -1,9 +1,9 @@
 clear;
 clc;
 close all;
-DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
+DEBUG_MODE_ON = 0; % Set this to 0 to stop plots and print outs during simulation
 NUMBER_WHALES = 100;
-NUMBER_KRILLS = 1000;
+NUMBER_KRILLS = 10000;
 AREA_SIZE = 100;
 
 KRILL_CARRYING_CAPACITY = AREA_SIZE^2;
@@ -64,3 +64,10 @@ for iTimestep = 1:TIMESTEPS
   end
 end
 toc
+
+plot(1:TIMESTEPS, numWhales, 1:TIMESTEPS, numKrills);
+fprintf('Whales, min - average - max: %d - %d - %d\n',...
+      min(numWhales), mean(numWhales), max(numWhales));
+fprintf('Krill, min - average - max: %d - %d - %d',...
+      min(numKrills), mean(numKrills), max(numKrills));    
+    
