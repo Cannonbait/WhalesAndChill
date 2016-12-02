@@ -1,7 +1,7 @@
 clear;
 clc;
 close all;
-DEBUG_MODE_ON = 0; % Set this to 0 to stop plots and print outs during simulation
+DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
 NUMBER_WHALES = 146;
 NUMBER_KRILLS = 2001;
 AREA_SIZE = 100;
@@ -43,8 +43,9 @@ for iTimestep = 1:TIMESTEPS
   whalePopulation = MoveWhales(whalePopulation);
   
   %Predation
-  [krillPopulation,whalePopulation] = Predation(krillPopulation, whalePopulation,...
+  [krillPopulation,whalePopulation] = PredationWhales(krillPopulation, whalePopulation,...
     FULLNESS_INCREASE_WHALES, WHALE_MAX_FULLNESS);
+  
  
   %Breeding
 %   whalePopulation = BreedingWhaleInterval(whalePopulation, WHALE_BREED_REQUIREMENT, ...
