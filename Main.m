@@ -2,7 +2,7 @@ clear;
 clc;
 close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
-NUMBER_WHALES = 100;
+NUMBER_WHALES = 1;
 NUMBER_KRILLS = 5000;
 AREA_SIZE = 100;
 
