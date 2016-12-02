@@ -2,12 +2,12 @@ clear;
 clc;
 close all;
 DEBUG_MODE_ON = 0; % Set this to 0 to stop plots and print outs during simulation
-NUMBER_WHALES = 100;
-NUMBER_KRILLS = 10000;
+NUMBER_WHALES = 146;
+NUMBER_KRILLS = 2001;
 AREA_SIZE = 100;
 
 KRILL_CARRYING_CAPACITY = AREA_SIZE^2;
-KRILL_REPRODUCTION_RATE = 1/(AREA_SIZE);      %0.00001
+KRILL_REPRODUCTION_RATE = 1/(AREA_SIZE);
 FULLNESS_INCREASE_WHALES = 10;
 BREEDING_CYCLE = 365;
 BREEDING_PROBABILITY = 1/BREEDING_CYCLE;
@@ -21,7 +21,7 @@ POST_BREED_FULLNESS = 200;
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
 
-TIMESTEPS = 10000;
+TIMESTEPS = 100000;
 
 numWhales = zeros(TIMESTEPS, 1);
 numKrills = zeros(TIMESTEPS, 1);
@@ -68,6 +68,6 @@ toc
 plot(1:TIMESTEPS, numWhales, 1:TIMESTEPS, numKrills);
 fprintf('Whales, min - average - max: %d - %f - %d\n',...
       min(numWhales), mean(numWhales), max(numWhales));
-fprintf('Krill, min - average - max: %d - %f - %d',...
+fprintf('Krill, min - average - max: %d - %f - %d\n',...
       min(numKrills), mean(numKrills), max(numKrills));    
     
