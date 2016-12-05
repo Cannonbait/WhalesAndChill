@@ -3,9 +3,12 @@ function DrawPopulations(whalePopulation, krillPopulation)
   lattice(whalePopulation > 0) = 3;
   
   % Plot
-  image(lattice);
-  colorMap = [1 1 1; 1 0 0; 0 0 1];
-  colormap(colorMap);
+ [x1,y1] = find(krillPopulation>0);
+ [x2,y2] = find(whalePopulation>0);
+ clf;
+  plot(x2,y2,'dk', 'MarkerSize',5,'MarkerEdgeColor','b','MarkerFaceColor',[0 0 0])
+    hold on
+  plot(x1,y1,'og', 'MarkerSize',2)
   drawnow;
 end
 
