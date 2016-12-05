@@ -2,8 +2,8 @@ clear;
 clc;
 close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
-NUMBER_WHALES = 146;
-NUMBER_KRILLS = 2001;
+NUMBER_WHALES = 20;
+NUMBER_KRILLS = 1000;
 NUMBER_FISHERMEN = 1;
 AREA_SIZE = 100;
 
@@ -22,12 +22,15 @@ POST_BREED_FULLNESS = 200;
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
-
+Theta = [ 0 90 180 270];
+for i = 1 : NUMBER_WHALES
+Angle(i) = Theta(randi(numel(Theta)));
+end
 TIMESTEPS = 100000;
 
 numWhales = zeros(TIMESTEPS, 1);
 numKrills = zeros(TIMESTEPS, 1);
-
+ whalePopulation_old = whalePopulation;
 tic
 for iTimestep = 1:TIMESTEPS
   
@@ -39,10 +42,11 @@ for iTimestep = 1:TIMESTEPS
       iTimestep, numWhales(iTimestep), numKrills(iTimestep));
   end
   
-  % Movement : try to possibly move in swarms or in groups
-  % Insted of random movement
+  % Movement
   krillPopulation = MoveKrill(krillPopulation);
   whalePopulation = MoveWhales(whalePopulation);
+  Angle = Direction(whalePopulation,Angle);
+  %whalePopulation = IntelligentWhales(whalePopulation,whalePopulation_old,Angle);
   
   %Predation
   [krillPopulation,whalePopulation] = PredationWhales(krillPopulation, whalePopulation,...
@@ -60,7 +64,7 @@ for iTimestep = 1:TIMESTEPS
   
   %Starvation
   whalePopulation = WhaleStarvation(whalePopulation, STARVATION_RATE, MIN_FOOD_SURVIVAL);
-  
+  whalePopulation_old = whalePopulation;
   %Fishing (To be added)
   
   %Animation
