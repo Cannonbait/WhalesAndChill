@@ -1,7 +1,5 @@
 function DrawPopulations(whalePopulation, krillPopulation)
-  lattice = krillPopulation + 1;
-  lattice(whalePopulation > 0) = 3;
-  
+   
   % Plot
  [x1,y1] = find(krillPopulation>0);
  [x2,y2] = find(whalePopulation>0);
