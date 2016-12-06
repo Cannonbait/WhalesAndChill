@@ -1,7 +1,7 @@
-function Angle = Direction(whalePopulation,Angle)
-Theta = [ 0 90 180 270];
+function Angle = Direction(whalePopulation,Angle,Theta)
+
 Whale_size = size(whalePopulation(whalePopulation>0),1);
-Angle_size = size(Angle,1);
+Angle_size = size(Angle,2);
 
 if Whale_size >Angle_size
   newAngles1 = Whale_size -Angle_size;

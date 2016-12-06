@@ -2,7 +2,7 @@ clear;
 clc;
 close all;
 DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
-NUMBER_WHALES = 20;
+NUMBER_WHALES = 50;
 NUMBER_KRILLS = 1000;
 NUMBER_FISHERMEN = 1;
 AREA_SIZE = 100;
@@ -22,9 +22,11 @@ POST_BREED_FULLNESS = 200;
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
-Theta = [ 0 90 180 270];
+Theta1 = [  90 180 270 360 ];
+Theta2 = [  90 180 270 360 ];
 for i = 1 : NUMBER_WHALES
-Angle(i) = Theta(randi(numel(Theta)));
+Angle1(i) = Theta1(randi(numel(Theta1)));
+Angle2(i) = Theta2(randi(numel(Theta2)));
 end
 TIMESTEPS = 100000;
 
@@ -44,9 +46,10 @@ for iTimestep = 1:TIMESTEPS
   
   % Movement
   krillPopulation = MoveKrill(krillPopulation);
-  whalePopulation = MoveWhales(whalePopulation);
-  Angle = Direction(whalePopulation,Angle);
-  %whalePopulation = IntelligentWhales(whalePopulation,whalePopulation_old,Angle);
+  %whalePopulation = MoveWhales(whalePopulation);
+  Angle1 = Direction(whalePopulation,Angle1,Theta1);
+  Angle2 = Direction(whalePopulation,Angle2,Theta2);
+  [whalePopulation,Angle1,Angle2] = IntelligentWhales(whalePopulation,whalePopulation_old,Angle1,Angle2);
   
   %Predation
   [krillPopulation,whalePopulation] = PredationWhales(krillPopulation, whalePopulation,...
@@ -71,6 +74,7 @@ for iTimestep = 1:TIMESTEPS
   if (DEBUG_MODE_ON)
     DrawPopulations(whalePopulation, krillPopulation);
   end
+   pause(0.3);
 end
 toc
 
