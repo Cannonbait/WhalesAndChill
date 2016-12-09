@@ -22,8 +22,8 @@ POST_BREED_FULLNESS = 200;
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
 whalePopulation = InitializeWhales(NUMBER_WHALES, AREA_SIZE, INITIAL_FULLNESS);
-Theta1 = [  90 180 270 360 ];
-Theta2 = [  90 180 270 360 ];
+Theta1 = [90,90,0,-90,-90,-90,0,90];
+Theta2 = [90,0,0,0,90,180,180,180];
 for i = 1 : NUMBER_WHALES
 Angle1(i) = Theta1(randi(numel(Theta1)));
 Angle2(i) = Theta2(randi(numel(Theta2)));
@@ -47,9 +47,7 @@ for iTimestep = 1:TIMESTEPS
   % Movement
   krillPopulation = MoveKrill(krillPopulation);
   %whalePopulation = MoveWhales(whalePopulation);
-  Angle1 = Direction(whalePopulation,Angle1,Theta1);
-  Angle2 = Direction(whalePopulation,Angle2,Theta2);
-  [whalePopulation,Angle1,Angle2] = IntelligentWhales(whalePopulation,whalePopulation_old,Angle1,Angle2);
+  [whalePopulation,Angle1,Angle2] = IntelligentWhales(whalePopulation,krillPopulation,whalePopulation_old,Angle1,Angle2);
   
   %Predation
   [krillPopulation,whalePopulation] = PredationWhales(krillPopulation, whalePopulation,...
@@ -74,7 +72,7 @@ for iTimestep = 1:TIMESTEPS
   if (DEBUG_MODE_ON)
     DrawPopulations(whalePopulation, krillPopulation);
   end
-   pause(0.3);
+  % pause(0.1);
 end
 toc
 
