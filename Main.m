@@ -4,7 +4,7 @@ close all;
 DEBUG_MODE_ON = 0; % Set this to 0 to stop plots and print outs during simulation
 NUMBER_WHALES = 50;
 NUMBER_KRILLS = 1000;
-NUMBER_FISHERMEN = 1;
+NUMBER_FISHERMEN = 14;
 AREA_SIZE = 100;
 
 KRILL_CARRYING_CAPACITY = AREA_SIZE^2;
@@ -53,7 +53,9 @@ for iTimestep = 1:TIMESTEPS
   [krillPopulation,whalePopulation] = PredationWhales(krillPopulation, whalePopulation,...
     FULLNESS_INCREASE_WHALES, WHALE_MAX_FULLNESS);
   
-  krillPopulation = PredationFishermen(krillPopulation, NUMBER_FISHERMEN);
+  if (iTimestep > 3000)
+    krillPopulation = PredationFishermen(krillPopulation, NUMBER_FISHERMEN);
+  end
   
  
   %Breeding
@@ -75,7 +77,11 @@ for iTimestep = 1:TIMESTEPS
   % pause(0.1);
 end
 toc
-
+figure(1)
+plot(1:TIMESTEPS, numWhales)
+figure(2)
+plot(1:TIMESTEPS, numKrills)
+figure(3)
 plot(1:TIMESTEPS, numWhales, 1:TIMESTEPS, numKrills);
 fprintf('Whales, min - average - max: %d - %f - %d\n',...
       min(numWhales), mean(numWhales), max(numWhales));
