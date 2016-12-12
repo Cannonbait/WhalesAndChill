@@ -1,23 +1,23 @@
 clear;
 clc;
 close all;
-DEBUG_MODE_ON = 1; % Set this to 0 to stop plots and print outs during simulation
+DEBUG_MODE_ON = 0; % Set this to 0 to stop plots and print outs during simulation
 NUMBER_WHALES = 50;
 NUMBER_KRILLS = 1000;
 NUMBER_FISHERMEN = 1;
 AREA_SIZE = 100;
 
 KRILL_CARRYING_CAPACITY = AREA_SIZE^2;
-KRILL_REPRODUCTION_RATE = 1/(AREA_SIZE);
+KRILL_REPRODUCTION_RATE = 1/(AREA_SIZE)*1.5;
 FULLNESS_INCREASE_WHALES = 10;
-BREEDING_CYCLE = 365;
-BREEDING_PROBABILITY = 1/BREEDING_CYCLE;
-STARVATION_RATE = 1;
+WHALE_BREEDING_CYCLE = 365;
+WHALE_BREEDING_PROBABILITY = 1/WHALE_BREEDING_CYCLE;
+STARVATION_RATE = 2;
 INITIAL_FULLNESS = 100;
 MIN_FOOD_SURVIVAL = 0;
-WHALE_BREED_REQUIREMENT = 800;
-WHALE_MAX_FULLNESS = 1200;
-POST_BREED_FULLNESS = 200;
+WHALE_BREED_REQUIREMENT = 200;
+WHALE_MAX_FULLNESS = 400;
+POST_BREED_FULLNESS = 100;
 
 
 krillPopulation = InitializeKrill(NUMBER_KRILLS, AREA_SIZE);
@@ -28,7 +28,7 @@ for i = 1 : NUMBER_WHALES
 Angle1(i) = Theta1(randi(numel(Theta1)));
 Angle2(i) = Theta2(randi(numel(Theta2)));
 end
-TIMESTEPS = 100000;
+TIMESTEPS = 10000;
 
 numWhales = zeros(TIMESTEPS, 1);
 numKrills = zeros(TIMESTEPS, 1);
@@ -46,8 +46,8 @@ for iTimestep = 1:TIMESTEPS
   
   % Movement
   krillPopulation = MoveKrill(krillPopulation);
-  %whalePopulation = MoveWhales(whalePopulation);
-  [whalePopulation,Angle1,Angle2] = IntelligentWhales(whalePopulation,krillPopulation,whalePopulation_old,Angle1,Angle2);
+  whalePopulation = MoveWhales(whalePopulation);
+  %[whalePopulation,Angle1,Angle2] = IntelligentWhales(whalePopulation,krillPopulation,whalePopulation_old,Angle1,Angle2);
   
   %Predation
   [krillPopulation,whalePopulation] = PredationWhales(krillPopulation, whalePopulation,...
@@ -60,7 +60,7 @@ for iTimestep = 1:TIMESTEPS
 %   whalePopulation = BreedingWhaleInterval(whalePopulation, WHALE_BREED_REQUIREMENT, ...
 %     POST_BREED_FULLNESS, INITIAL_FULLNESS, iTimestep, BREEDING_CYCLE);
   whalePopulation = BreedingWhaleProbability(whalePopulation, WHALE_BREED_REQUIREMENT, ... 
-    POST_BREED_FULLNESS, INITIAL_FULLNESS, BREEDING_PROBABILITY);
+    POST_BREED_FULLNESS, INITIAL_FULLNESS, WHALE_BREEDING_PROBABILITY);
   krillPopulation = BreedingKrill(krillPopulation, KRILL_REPRODUCTION_RATE, KRILL_CARRYING_CAPACITY);
   
   %Starvation
